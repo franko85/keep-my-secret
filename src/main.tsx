@@ -2,18 +2,23 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import './index.css';
 import App from './App.tsx';
-import { initializeStorage } from './mocks/storage';
-import { worker } from './mocks/browser';
 
-// Inizializza i dati seed nel localStorage
-initializeStorage();
-
-// Avvia Mock Service Worker in development
+// Avvia Mock Service Worker se abilitato da configurazione
 async function prepare() {
-  if (import.meta.env.DEV) {
-    return worker.start({
-      onUnhandledRequest: 'bypass',
-    });
+  if (import.meta.env.VITE_USE_MSW === 'true') {
+    try {
+      const { initializeStorage } = await import('./mocks/storage');
+      const { worker } = await import('./mocks/browser');
+      initializeStorage();
+      // Path corretto per Aruba o sottocartella
+      return worker.start({
+        onUnhandledRequest: 'bypass',
+        serviceWorker: { url: '/keep-my-secret/mockServiceWorker.js' },
+      });
+    } catch (e) {
+      // MSW non disponibile, ignora in produzione
+      console.warn('MSW non disponibile:', e);
+    }
   }
   return Promise.resolve();
 }
@@ -25,4 +30,3 @@ prepare().then(() => {
     </StrictMode>,
   );
 });
-

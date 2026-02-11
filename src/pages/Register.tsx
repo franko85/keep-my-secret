@@ -100,7 +100,7 @@ const Register: React.FC = () => {
                 label="Email"
                 type="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
                 margin="normal"
                 required
                 autoComplete="email"
@@ -111,7 +111,7 @@ const Register: React.FC = () => {
                 fullWidth
                 label="Nome Utente"
                 value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}
                 margin="normal"
                 required
                 autoComplete="username"
@@ -121,7 +121,7 @@ const Register: React.FC = () => {
                 label="Password"
                 type="password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
                 margin="normal"
                 required
                 autoComplete="new-password"
@@ -131,7 +131,7 @@ const Register: React.FC = () => {
                 label="Conferma Password"
                 type="password"
                 value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setConfirmPassword(e.target.value)}
                 margin="normal"
                 required
                 autoComplete="new-password"

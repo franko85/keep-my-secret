@@ -1,0 +1,11 @@
+RewriteEngine On
+RewriteBase /keep-my-secret/
+
+# Non riscrivere le richieste alla cartella assets
+RewriteCond %{REQUEST_URI} ^/keep-my-secret/assets/ [NC]
+RewriteRule ^ - [L]
+
+RewriteRule ^index\.html$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /keep-my-secret/index.html [L]

@@ -30,6 +30,7 @@ const CreateGroupModal: React.FC<CreateGroupModalProps> = ({
   onGroupCreated,
 }) => {
   const theme = useTheme();
+  // @ts-ignore - MUI theme breakpoints
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
@@ -186,7 +187,7 @@ const CreateGroupModal: React.FC<CreateGroupModalProps> = ({
             fullWidth
             label="Nome Gruppo"
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
             margin="normal"
             required
             autoFocus
@@ -197,7 +198,7 @@ const CreateGroupModal: React.FC<CreateGroupModalProps> = ({
             label="Password Gruppo"
             type="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
             margin="normal"
             required
             helperText="Scegli una password per proteggere l'accesso al gruppo"

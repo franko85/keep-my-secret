@@ -34,6 +34,7 @@ const CreateThreadModal: React.FC<CreateThreadModalProps> = ({
   onThreadCreated,
 }) => {
   const theme = useTheme();
+  // @ts-ignore - MUI theme breakpoints
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -139,7 +140,7 @@ const CreateThreadModal: React.FC<CreateThreadModalProps> = ({
             fullWidth
             label="Titolo"
             value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)}
             margin="normal"
             required
             autoFocus
@@ -150,7 +151,7 @@ const CreateThreadModal: React.FC<CreateThreadModalProps> = ({
             fullWidth
             label="Contenuto"
             value={content}
-            onChange={(e) => setContent(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setContent(e.target.value)}
             margin="normal"
             required
             multiline

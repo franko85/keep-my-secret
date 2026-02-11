@@ -86,7 +86,7 @@ const Login: React.FC = () => {
                 label="Email"
                 type="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
                 margin="normal"
                 required
                 autoComplete="email"
@@ -98,7 +98,7 @@ const Login: React.FC = () => {
                 label="Password"
                 type="password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
                 margin="normal"
                 required
                 autoComplete="current-password"

@@ -11,6 +11,7 @@ const GroupDetail: React.FC = () => {
   const { groupId } = useParams<{ groupId: string }>();
   const navigate = useNavigate();
   const theme = useTheme();
+  // @ts-ignore - MUI theme breakpoints
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const [threads, setThreads] = useState<Thread[]>([]);
   const [isLoading, setIsLoading] = useState(true);

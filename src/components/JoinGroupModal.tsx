@@ -28,6 +28,7 @@ const JoinGroupModal: React.FC<JoinGroupModalProps> = ({
   onGroupJoined,
 }) => {
   const theme = useTheme();
+  // @ts-ignore - MUI theme breakpoints
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const [groupKey, setGroupKey] = useState('');
   const [password, setPassword] = useState('');
@@ -98,7 +99,7 @@ const JoinGroupModal: React.FC<JoinGroupModalProps> = ({
             fullWidth
             label="Chiave Gruppo"
             value={groupKey}
-            onChange={(e) => setGroupKey(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setGroupKey(e.target.value)}
             margin="normal"
             required
             autoFocus
@@ -110,7 +111,7 @@ const JoinGroupModal: React.FC<JoinGroupModalProps> = ({
             label="Password Gruppo"
             type="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
             margin="normal"
             required
             helperText="La password condivisa per accedere al gruppo"

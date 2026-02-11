@@ -56,7 +56,7 @@ const AddCommentForm: React.FC<AddCommentFormProps> = ({ threadId, isDisabled, o
           rows={3}
           placeholder={isDisabled ? 'Thread scaduto - impossibile commentare' : 'Scrivi il tuo commento anonimo...'}
           value={content}
-          onChange={(e) => setContent(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setContent(e.target.value)}
           disabled={isDisabled || isLoading}
           sx={{ mb: 2 }}
         />

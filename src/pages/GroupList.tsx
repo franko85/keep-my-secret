@@ -28,6 +28,7 @@ import {formatDate} from '../utils/dateUtils';
 const GroupList: React.FC = () => {
     const navigate = useNavigate();
     const theme = useTheme();
+    // @ts-ignore - MUI theme breakpoints
     const isMobile = useMediaQuery(theme.breakpoints.down('md'));
     const {groups, fetchGroups, addGroup} = useGroups();
     const {user} = useAuth();
