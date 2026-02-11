@@ -67,17 +67,19 @@ const Register: React.FC = () => {
   };
 
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth={false} disableGutters sx={{ p: 0 }}>
       <Box
         sx={{
           minHeight: '100vh',
+          width: '100vw',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
-          py: 3,
+          alignItems: 'center',
+          pt: { xs: 2, sm: 4 },
         }}
       >
-        <Card>
+        <Card sx={{ width: '100%', maxWidth: 420, boxShadow: 3 }}>
           <CardContent sx={{ p: { xs: 3, sm: 4 } }}>
             <Typography variant="h4" component="h1" gutterBottom align="center">
               Crea Account
