@@ -9,7 +9,6 @@ import {
     Chip,
     CircularProgress,
     Fab,
-    Grid,
     IconButton,
     SpeedDial,
     SpeedDialAction,
@@ -98,47 +97,55 @@ const GroupList: React.FC = () => {
                     <Typography variant="h6" color="text.secondary" gutterBottom>
                         Nessun gruppo trovato
                     </Typography>
-                    <Typography variant="body2" color="text.secondary" paragraph>
+                    <Typography variant="body2" color="text.secondary" sx={{mb: 0}}>
                         Crea un nuovo gruppo o unisciti a uno esistente per iniziare!
                     </Typography>
                 </Card>
             ) : (
-                <Grid container spacing={2} sx={{mt: 1}}>
+                <Box sx={{
+                    display: 'grid',
+                    gridTemplateColumns: {
+                        xs: '1fr',
+                        sm: 'repeat(2, 1fr)',
+                        md: 'repeat(3, 1fr)',
+                        lg: 'repeat(4, 1fr)'
+                    },
+                    gap: 2,
+                    mt: 1
+                }}>
                     {groups.map((group) => (
-                        <Grid item xs={12} sm={6} md={4} lg={3} key={group.id}>
-                            <Card sx={{mb: 2}}>
-                                <CardActionArea onClick={() => handleGroupClick(group)}>
-                                    <CardContent>
-                                        <Box display="flex" alignItems="center" mb={1}>
-                                            <PeopleIcon color="primary" sx={{mr: 1}}/>
-                                            <Typography variant="h6" component="div">
-                                                {group.name}
-                                            </Typography>
-                                        </Box>
-                                        <Box display="flex" gap={1} mb={1}>
+                        <Card key={group.id} sx={{mb: 2}}>
+                            <CardActionArea onClick={() => handleGroupClick(group)}>
+                                <CardContent>
+                                    <Box display="flex" alignItems="center" mb={1}>
+                                        <PeopleIcon color="primary" sx={{mr: 1}}/>
+                                        <Typography variant="h6" component="div">
+                                            {group.name}
+                                        </Typography>
+                                    </Box>
+                                    <Box display="flex" gap={1} mb={1}>
+                                        <Chip
+                                            label={`${group.memberIds.length} membri`}
+                                            size="small"
+                                            variant="outlined"
+                                        />
+                                        {group.createdById === user?.id && (
                                             <Chip
-                                                label={`${group.memberIds.length} membri`}
+                                                label="Creatore"
                                                 size="small"
+                                                color="primary"
                                                 variant="outlined"
                                             />
-                                            {group.createdById === user?.id && (
-                                                <Chip
-                                                    label="Creatore"
-                                                    size="small"
-                                                    color="primary"
-                                                    variant="outlined"
-                                                />
-                                            )}
-                                        </Box>
-                                        <Typography variant="caption" color="text.secondary">
-                                            Creato il {formatDate(group.createdAt)}
-                                        </Typography>
-                                    </CardContent>
-                                </CardActionArea>
-                            </Card>
-                        </Grid>
+                                        )}
+                                    </Box>
+                                    <Typography variant="caption" color="text.secondary">
+                                        Creato il {formatDate(group.createdAt)}
+                                    </Typography>
+                                </CardContent>
+                            </CardActionArea>
+                        </Card>
                     ))}
-                </Grid>
+                </Box>
             )}
 
             {/* Pulsanti azione mobile con SpeedDial */}
@@ -152,16 +159,16 @@ const GroupList: React.FC = () => {
                     open={speedDialOpen}
                 >
                     <SpeedDialAction
-                        icon={<AddIcon/>} // Usa il + per la creazione
-                        tooltipTitle="Crea Gruppo"
+                        icon={<AddIcon/>}
+                        title="Crea Gruppo"
                         onClick={() => {
                             setSpeedDialOpen(false);
                             setCreateModalOpen(true);
                         }}
                     />
                     <SpeedDialAction
-                        icon={<PeopleIcon/>} // Icona per Unisciti
-                        tooltipTitle="Unisciti"
+                        icon={<PeopleIcon/>}
+                        title="Unisciti"
                         onClick={() => {
                             setSpeedDialOpen(false);
                             setJoinModalOpen(true);

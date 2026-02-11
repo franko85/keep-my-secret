@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography, Card, CardContent, Avatar, Divider, Button } from '@mui/material';
+import { Box, Typography, Card, CardContent, Avatar, Divider } from '@mui/material';
 import { Person as PersonIcon, Email as EmailIcon } from '@mui/icons-material';
 import { useAuth } from '../contexts/AuthContext';
 import { formatDate } from '../utils/dateUtils';

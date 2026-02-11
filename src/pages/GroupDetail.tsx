@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Box, Typography, Card, CardContent, CardActionArea, Fab, CircularProgress, Alert, Chip, IconButton, Grid, useMediaQuery, useTheme } from '@mui/material';
+import { Box, Typography, Card, CardContent, CardActionArea, Fab, CircularProgress, Alert, Chip, IconButton, useMediaQuery, useTheme } from '@mui/material';
 import { Add as AddIcon, ArrowBack as ArrowBackIcon, CheckCircle as CheckCircleIcon, Schedule as ScheduleIcon, Pending as PendingIcon } from '@mui/icons-material';
 import { threadService } from '../services/threadService';
 import type { Thread } from '../types';
@@ -62,28 +62,33 @@ const GroupDetail: React.FC = () => {
           <Typography variant="body2" color="text.secondary">Crea il primo thread!</Typography>
         </Card>
       ) : (
-        <Grid container spacing={2}>
+        <Box sx={{
+          display: 'grid',
+          gridTemplateColumns: {
+            xs: '1fr',
+            md: 'repeat(2, 1fr)'
+          },
+          gap: 2
+        }}>
           {threads.map((thread) => {
             const status = getThreadStatus(thread);
             return (
-              <Grid item xs={12} md={6} key={thread.id}>
-                <Card><CardActionArea onClick={() => handleThreadClick(thread)}><CardContent>
-                  <Box display="flex" justifyContent="space-between" alignItems="start" mb={1}>
-                    <Typography variant="h6" sx={{ flexGrow: 1, pr: 1 }}>{thread.title}</Typography>
-                    <Chip label={status.label} color={status.color} size="small" icon={status.icon} />
-                  </Box>
-                  <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-                    {thread.content.length > 100 ? `${thread.content.substring(0, 100)}...` : thread.content}
-                  </Typography>
-                  <Chip label={formatCountdown(thread.endDate)} size="small" variant="outlined" color={isThreadExpired(thread.endDate) ? 'default' : 'warning'} />
-                  <Typography variant="caption" color="text.secondary" display="block" sx={{ mt: 1 }}>
-                    Creato il {formatDate(thread.createdAt)}
-                  </Typography>
-                </CardContent></CardActionArea></Card>
-              </Grid>
+              <Card key={thread.id}><CardActionArea onClick={() => handleThreadClick(thread)}><CardContent>
+                <Box display="flex" justifyContent="space-between" alignItems="start" mb={1}>
+                  <Typography variant="h6" sx={{ flexGrow: 1, pr: 1 }}>{thread.title}</Typography>
+                  <Chip label={status.label} color={status.color} size="small" icon={status.icon} />
+                </Box>
+                <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                  {thread.content.length > 100 ? `${thread.content.substring(0, 100)}...` : thread.content}
+                </Typography>
+                <Chip label={formatCountdown(thread.endDate)} size="small" variant="outlined" color={isThreadExpired(thread.endDate) ? 'default' : 'warning'} />
+                <Typography variant="caption" color="text.secondary" display="block" sx={{ mt: 1 }}>
+                  Creato il {formatDate(thread.createdAt)}
+                </Typography>
+              </CardContent></CardActionArea></Card>
             );
           })}
-        </Grid>
+        </Box>
       )}
       <Fab color="primary" sx={{ position: 'fixed', bottom: isMobile ? 72 : 16, right: 16 }} onClick={() => setCreateModalOpen(true)}><AddIcon /></Fab>
       {groupId && <CreateThreadModal open={createModalOpen} onClose={() => setCreateModalOpen(false)} groupId={groupId} onThreadCreated={handleThreadCreated} />}
